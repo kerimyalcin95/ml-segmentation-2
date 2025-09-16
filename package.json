@@ -1,0 +1,24 @@
+{
+  "name": "ml-segmentation-2",
+  "version": "1.0.0",
+  "description": "This side project builds on my previous work in machine learning-based image segmentation. The current focus is on enhancing software quality and user experience. It serves as a practical environment to improve and deepen my software engineering skills.",
+  "homepage": "https://github.com/kerimyalcin95/ml-segmentation-2#readme",
+  "bugs": {
+    "url": "https://github.com/kerimyalcin95/ml-segmentation-2/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kerimyalcin95/ml-segmentation-2.git"
+  },
+  "license": "MIT",
+  "author": "Kerim Yalcin",
+  "type": "commonjs",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron .",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "devDependencies": {
+    "electron": "^38.1.1"
+  }
+}

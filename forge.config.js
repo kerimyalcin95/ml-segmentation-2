@@ -8,8 +8,16 @@ module.exports = {
   rebuildConfig: {},
   makers: [
     {
-      name: '@electron-forge/maker-squirrel',
-      config: {},
+    name: '@electron-forge/maker-squirrel',
+    config: {
+      name: 'ml_segmentation_2',
+      authors: 'Kerim Yalcin',
+      setupExe: 'ml-segmentation-2-setup.exe',
+      noMsi: true,
+      setupMsi: false,
+      skipUpdateIcon: false,
+      shortcutName: 'ML-Segmentation-2'
+        },
     },
     {
       name: '@electron-forge/maker-zip',

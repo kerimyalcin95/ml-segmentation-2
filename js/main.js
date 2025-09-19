@@ -8,13 +8,13 @@ const createWindow = () =>
 
     const win = new BrowserWindow({
         width: 800,
-        height: 600,
+        height: 800,
         webPreferences: {
             preload: path.join(__dirname, 'preload.js')
         }
     });
 
-    win.loadFile('index.html');
+    win.loadFile(path.join(__dirname, '..', 'html', 'index.html'));
 };
 
 app.whenReady().then(() =>

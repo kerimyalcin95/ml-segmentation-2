@@ -1,4 +1,6 @@
-# Segmentation App 2 [⚠️ Early-stage project. Mostly empty.]
+# Segmentation App 2 
+
+⚠️ Early-stage project. Mostly empty
 
 ## Table of Contents
 

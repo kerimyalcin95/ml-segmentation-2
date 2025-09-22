@@ -1,6 +1,9 @@
 const { app, BrowserWindow } = require('electron');
-const path = require('node:path')
+const path = require('node:path');
+const { spawn } = require('node:child_process');
+const WebSocket = require('ws');
 
+let ws;
 
 const createWindow = () =>
 {
@@ -17,9 +20,47 @@ const createWindow = () =>
     win.loadFile(path.join(__dirname, '..', 'html', 'index.html'));
 };
 
+// Added from ChatGPT for further study
+// Connect to Python WebSocket server as soon as app is ready
+function connectToPythonServer()
+{
+    ws = new WebSocket('ws://localhost:8765');
+    ws.on('open', () =>
+    {
+        console.log('Connected to Python server');
+        ws.send('Hello from Electron main process!');
+    });
+
+    ws.on('message', (data) =>
+    {
+        console.log(`Received from server: ${data}`);
+    });
+
+    ws.on('close', () => console.log('Connection closed'));
+    ws.on('error', (err) => console.error('WebSocket error:', err));
+}
+
+// From ChatGPT for studying
+function startPythonServer()
+{
+    pythonProc = spawn('python', [path.join(__dirname, '..', 'python', 'server.py')]);
+
+    pythonProc.stdout.on('data', (data) => console.log(`Py: ${data}`));
+    pythonProc.stderr.on('data', (data) => console.error(`PyErr: ${data}`));
+}
+
+function stopPythonServer()
+{
+    if (ws) ws.close();
+    if (pythonProc) pythonProc.kill();
+}
+
 app.whenReady().then(() =>
 {
     createWindow();
+    startPythonServer();
+
+    setTimeout(connectToPythonServer, 1000);
 
     app.on('activate', () =>
     {
@@ -31,6 +72,8 @@ app.whenReady().then(() =>
 
 app.on('window-all-closed', () =>
 {
+    stopPythonServer();
+
     if (process.platform !== 'darwin') {
         app.quit();
     }

@@ -20,8 +20,6 @@ const createWindow = () =>
     win.loadFile(path.join(__dirname, '..', 'html', 'index.html'));
 };
 
-// Added from ChatGPT for further study
-// Connect to Python WebSocket server as soon as app is ready
 function connectToPythonServer()
 {
     ws = new WebSocket('ws://localhost:8765');
@@ -40,7 +38,6 @@ function connectToPythonServer()
     ws.on('error', (err) => console.error('WebSocket error:', err));
 }
 
-// From ChatGPT for studying
 function startPythonServer()
 {
     pythonProc = spawn('python', [path.join(__dirname, '..', 'python', 'server.py')]);

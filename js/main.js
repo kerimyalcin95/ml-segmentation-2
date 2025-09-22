@@ -1,9 +1,12 @@
-const { app, BrowserWindow } = require('electron');
+const { app, BrowserWindow, ipcMain } = require('electron');
 const path = require('node:path');
 const { spawn } = require('node:child_process');
 const WebSocket = require('ws');
 
 let ws;
+const pythonPath = app.isPackaged ? 
+    path.join(__dirname, '..', '..', 'app.asar.unpacked', 'python', 'server.py') : 
+    path.join(__dirname, '..', 'python', 'server.py');
 
 const createWindow = () =>
 {
@@ -31,7 +34,12 @@ function connectToPythonServer()
 
     ws.on('message', (data) =>
     {
-        console.log(`Received from server: ${data}`);
+        console.log(`Received from Python: ${data}`);
+
+        const win = BrowserWindow.getAllWindows()[0];
+        if (win && !win.webContents.isLoading()) {
+            win.webContents.send('update-button', data.toString());
+        }
     });
 
     ws.on('close', () => console.log('Connection closed'));
@@ -40,7 +48,8 @@ function connectToPythonServer()
 
 function startPythonServer()
 {
-    pythonProc = spawn('python', [path.join(__dirname, '..', 'python', 'server.py')]);
+    pythonProc = spawn('python', ['-u', pythonPath]);
+    console.log(process.resourcesPath);
 
     pythonProc.stdout.on('data', (data) => console.log(`Py: ${data}`));
     pythonProc.stderr.on('data', (data) => console.error(`PyErr: ${data}`));
@@ -51,6 +60,15 @@ function stopPythonServer()
     if (ws) ws.close();
     if (pythonProc) pythonProc.kill();
 }
+
+ipcMain.on('send-to-python', (event, message) =>
+{
+    if (ws && ws.readyState === WebSocket.OPEN) {
+        ws.send(message);
+    } else {
+        console.error('WebSocket not connected');
+    }
+});
 
 app.whenReady().then(() =>
 {
@@ -65,6 +83,8 @@ app.whenReady().then(() =>
             createWindow();
         }
     });
+
+    console.log(pythonPath.toString());
 });
 
 app.on('window-all-closed', () =>

@@ -2,13 +2,14 @@
 import asyncio
 import websockets
 
-async def echo(websocket):
+async def handler(websocket):
     async for message in websocket:
-        print(f"Received from client: {message}")
-        await websocket.send(f"Echo: {message}")
+        print(f"Received from Electron: {message}")
+        # Send a response back
+        await websocket.send(f"Python says: {message.upper()}")
 
 async def main():
-    async with websockets.serve(echo, "localhost", 8765):
+    async with websockets.serve(handler, "localhost", 8765):
         print("WebSocket server listening on ws://localhost:8765")
         await asyncio.Future() 
 

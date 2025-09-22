@@ -1,2 +1,13 @@
-const information = document.getElementById('info')
-information.innerText = `This app is using Chrome (v${versions.chrome()}), Node.js (v${versions.node()}), and Electron (v${versions.electron()})`
+const button = document.getElementById('messageButton');
+const p = document.getElementById('p_text');
+
+window.electronAPI.onMessage((message) =>
+{
+    p.title = message;
+    p.textContent = message;
+});
+
+button.addEventListener('click', () =>
+{
+    window.electronAPI.sendMessage('Button clicked!');
+});

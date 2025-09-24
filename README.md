@@ -9,6 +9,8 @@
   - [Node.js and Python](#nodejs-and-python)
   - [Installing Node.js packages](#installing-nodejs-packages)
   - [Installing Python packages](#installing-python-packages)
+  - [Running and testing the Svelte frontend](#running-and-testing-the-svelte-frontend)
+  - [Building the Svelte frontend](#building-the-svelte-frontend)
   - [Running and testing the Electron app](#running-and-testing-the-electron-app)
   - [Building and distributing the Electron app](#building-and-distributing-the-electron-app)
 - **[Manual(TODO)](#manual)**
@@ -29,15 +31,26 @@ Download and install [Python](https://www.python.org/downloads/)
 
 ### Installing Node.js packages
 
-Inside the project folder run `npm install`
+Inside the project folder run `npm install`. Then inside the `svelte-frontend` folder run `npm install` again.
 
 ### Installing Python packages
 
-Inside the project folder run `pip install -r requirements.txt`
+Inside the project folder run `pip install -r requirements.txt`. `pip` installs all packages
+listed inside `requirements.txt`.
+
+### Running and testing the Svelte frontend
+
+Inside the `svelte-frontend` folder run `npm run preview`. Vite starts a server to preview
+the svelte app.
+
+### Building the Svelte frontend
+
+Inside the `svelte-frontend` folder run `npm run build`. Vite generates the Svelte frontend
+files inside the `svelte-frontend/dist` folder.
 
 ### Running and testing the Electron app
 
-Inside the project folder run `npm run start`
+Inside the project folder run `npm run start`. This starts the Electron app through Electron-Forge.
 
 ### Building and distributing the Electron app
 

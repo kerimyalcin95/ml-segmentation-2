@@ -20,7 +20,12 @@ const createWindow = () =>
         }
     });
 
-    win.loadFile(path.join(__dirname, '..', 'html', 'index.html'));
+    /* vanilla-frontend */
+    win.loadFile(path.join(__dirname, '..', 'vanilla-frontend', 'html', 'index.html'));
+    
+    /* svelte-frontend */
+    //win.loadFile(path.join(__dirname, '..', 'html', '../', 'svelte-frontend', 'dist', 'index.html'));
+    
 };
 
 function connectToPythonServer()

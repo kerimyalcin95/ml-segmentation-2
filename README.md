@@ -5,6 +5,7 @@
 ## Table of Contents
 
 - **[About](#about)**
+- **[Architecture](#architecture)**
 - **[How to build and run the project](#how-to-build-and-run-the-project)**
   - [Node.js and Python](#nodejs-and-python)
   - [Installing Node.js packages](#installing-nodejs-packages)
@@ -21,6 +22,13 @@
 This side project builds on my previous work in machine learning-based image segmentation. The current focus is on enhancing software quality and user experience. It serves as a practical environment to improve and deepen my software engineering skills.
 
 Changes include codebase improvement, automated unit testing, modernizing the UI and adding some features missing in the previous project.
+
+## Architecture
+
+- Backend: Python – handles core logic and data processing.
+- Bridge: Electron – wraps the frontend as a desktop app and connects to the backend.
+- IPC: WebSocket – real-time communication between frontend and backend.
+- Frontend: Svelte (TypeScript) – dynamic UI rendering and interaction.
 
 ## How to build and run the project
 

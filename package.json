@@ -13,12 +13,11 @@
   "license": "MIT",
   "author": "Kerim Yalcin",
   "type": "commonjs",
-  "main": "js/main.js",
+  "main": "dist/main.js",
   "scripts": {
-    "start": "electron-forge start",
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "package": "electron-forge package",
-    "make": "electron-forge make"
+    "start": "npx tsc && electron-forge start",
+    "package": "npx tsc && electron-forge package",
+    "make": "npx tsc && electron-forge make"
   },
   "devDependencies": {
     "@electron-forge/cli": "^7.9.0",
@@ -29,7 +28,11 @@
     "@electron-forge/plugin-auto-unpack-natives": "^7.9.0",
     "@electron-forge/plugin-fuses": "^7.9.0",
     "@electron/fuses": "^1.8.0",
-    "electron": "^38.1.1"
+    "@types/electron": "^1.4.38",
+    "@types/node": "^24.5.2",
+    "@types/ws": "^8.18.1",
+    "electron": "^38.1.1",
+    "typescript": "^5.9.2"
   },
   "dependencies": {
     "electron-squirrel-startup": "^1.0.1",

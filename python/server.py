@@ -6,7 +6,7 @@ async def handler(websocket):
     async for message in websocket:
         print(f"Received from Electron: {message}")
         # Send a response back
-        await websocket.send(f"Python says: {message.upper()}")
+        await websocket.send(f"{message}")
 
 async def main():
     async with websockets.serve(handler, "localhost", 8765):

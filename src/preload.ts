@@ -21,14 +21,3 @@ contextBridge.exposeInMainWorld('electronAPI', {
         ipcRenderer.send('send-to-python', message);
     },
 } as ElectronAPI);
-
-declare global {
-    interface Window {
-        versions: {
-            node: () => string;
-            chrome: () => string;
-            electron: () => string;
-        };
-        electronAPI: ElectronAPI;
-    }
-}

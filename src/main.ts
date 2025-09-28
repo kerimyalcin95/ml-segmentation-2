@@ -10,7 +10,8 @@ const pythonPath: string = app.isPackaged
     ? path.join(__dirname, '..', '..', 'app.asar.unpacked', 'python', 'server.py')
     : path.join(__dirname, '..', 'python', 'server.py');
 
-const createWindow = (): void => {
+const createWindow = (): void =>
+{
     if (require('electron-squirrel-startup')) {
         app.quit();
         return;
@@ -31,19 +32,23 @@ const createWindow = (): void => {
     win.loadFile(path.join(__dirname, '..', 'html', '../', 'svelte-frontend', 'dist', 'index.html'));
 };
 
-const connectToPythonServer = (): void => {
+const connectToPythonServer = (): void =>
+{
     ws = new WebSocket('ws://localhost:8765');
 
-    ws.on('open', () => {
+    ws.on('open', () =>
+    {
         console.log('Connected to Python server');
         ws?.send('Hello from Electron main process!');
     });
 
-    ws.on('message', (data) => {
+    ws.on('message', (data) =>
+    {
         console.log(`Received from Python: ${data}`);
         const win = BrowserWindow.getAllWindows()[0];
         if (win && !win.webContents.isLoading()) {
             win.webContents.send('update-button', data.toString());
+            console.log(`Sending [${data.toString()}] to IPC Electron`);
         }
     });
 
@@ -51,7 +56,8 @@ const connectToPythonServer = (): void => {
     ws.on('error', (err) => console.error('WebSocket error:', err));
 };
 
-const startPythonServer = (): void => {
+const startPythonServer = (): void =>
+{
     pythonProc = spawn('python', ['-u', pythonPath]);
     console.log(process.resourcesPath);
 
@@ -59,12 +65,14 @@ const startPythonServer = (): void => {
     pythonProc.stderr.on('data', (data) => console.error(`PyErr: ${data}`));
 };
 
-const stopPythonServer = (): void => {
+const stopPythonServer = (): void =>
+{
     ws?.close();
     pythonProc?.kill();
 };
 
-ipcMain.on('send-to-python', (event: IpcMainEvent, message: string) => {
+ipcMain.on('send-to-python', (event: IpcMainEvent, message: string) =>
+{
     if (ws && ws.readyState === WebSocket.OPEN) {
         ws.send(message);
     } else {
@@ -72,20 +80,23 @@ ipcMain.on('send-to-python', (event: IpcMainEvent, message: string) => {
     }
 });
 
-app.whenReady().then(() => {
+app.whenReady().then(() =>
+{
     createWindow();
     startPythonServer();
 
     setTimeout(connectToPythonServer, 1000);
 
-    app.on('activate', () => {
+    app.on('activate', () =>
+    {
         if (BrowserWindow.getAllWindows().length === 0) createWindow();
     });
 
     console.log(pythonPath.toString());
 });
 
-app.on('window-all-closed', () => {
+app.on('window-all-closed', () =>
+{
     stopPythonServer();
     if (process.platform !== 'darwin') app.quit();
 });

@@ -25,9 +25,6 @@ const createWindow = (): void =>
         },
     });
 
-    // Load vanilla-frontend
-    // win.loadFile(path.join(__dirname, '..', 'vanilla-frontend', 'html', 'index.html'));
-
     // Load Svelte frontend
     win.loadFile(path.join(__dirname, '..', 'html', '../', 'svelte-frontend', 'dist', 'index.html'));
 };

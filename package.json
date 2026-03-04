@@ -1,42 +1,39 @@
 {
-  "name": "ml-segmentation-2",
-  "version": "1.0.0",
-  "description": "This side project builds on my previous work in machine learning-based image segmentation. The current focus is on enhancing software quality and user experience. It serves as a practical environment to improve and deepen my software engineering skills.",
-  "homepage": "https://github.com/kerimyalcin95/ml-segmentation-2#readme",
-  "bugs": {
-    "url": "https://github.com/kerimyalcin95/ml-segmentation-2/issues"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/kerimyalcin95/ml-segmentation-2.git"
-  },
-  "license": "MIT",
-  "author": "Kerim Yalcin",
-  "type": "commonjs",
-  "main": "dist/main.js",
-  "scripts": {
-    "start": "npx tsc && electron-forge start",
-    "package": "npx tsc && electron-forge package",
-    "make": "npx tsc && electron-forge make"
-  },
-  "devDependencies": {
-    "@electron-forge/cli": "^7.9.0",
-    "@electron-forge/maker-deb": "^7.9.0",
-    "@electron-forge/maker-rpm": "^7.9.0",
-    "@electron-forge/maker-squirrel": "^7.9.0",
-    "@electron-forge/maker-zip": "^7.9.0",
-    "@electron-forge/plugin-auto-unpack-natives": "^7.9.0",
-    "@electron-forge/plugin-fuses": "^7.9.0",
-    "@electron/fuses": "^1.8.0",
-    "@types/electron": "^1.4.38",
-    "@types/node": "^24.5.2",
-    "@types/ws": "^8.18.1",
-    "electron": "^38.1.1",
-    "ts-node": "^10.9.2",
-    "typescript": "^5.9.2"
-  },
-  "dependencies": {
-    "electron-squirrel-startup": "^1.0.1",
-    "ws": "^8.18.3"
-  }
+    "name": "ml-segmentation-2",
+    "version": "1.0.0",
+    "description": "This side project builds on my previous work in machine learning-based image segmentation. The current focus is on enhancing software quality and user experience. It serves as a practical environment to improve and deepen my software engineering skills.",
+    "homepage": "https://github.com/kerimyalcin95/ml-segmentation-2#readme",
+    "bugs": {
+        "url": "https://github.com/kerimyalcin95/ml-segmentation-2/issues"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/kerimyalcin95/ml-segmentation-2.git"
+    },
+    "license": "MIT",
+    "author": "Kerim Yalcin",
+    "type": "commonjs",
+    "main": "dist/main.js",
+    "scripts": {
+        "start": "npx tsc && electron-forge start",
+        "package": "npx tsc && electron-forge package",
+        "make": "npx tsc && electron-forge make"
+    },
+    "devDependencies": {
+        "@electron-forge/cli": "^7.11.1",
+        "@eslint/js": "^10.0.1",
+        "@eslint/json": "^1.0.1",
+        "@types/node": "^25.3.3",
+        "@types/ws": "^8.18.1",
+        "electron": "^40.6.1",
+        "eslint": "^10.0.2",
+        "globals": "^17.4.0",
+        "ts-node": "^10.9.2",
+        "typescript": "^5.9.3",
+        "typescript-eslint": "^8.56.1"
+    },
+    "dependencies": {
+        "jiti": "^2.6.1",
+        "ws": "^8.19.0"
+    }
 }

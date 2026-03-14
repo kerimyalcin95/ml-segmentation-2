@@ -3,9 +3,10 @@ import path from 'node:path';
 import { spawn, ChildProcessWithoutNullStreams } from 'node:child_process';
 import WebSocket from 'ws';
 
-let ws: WebSocket | undefined;
-let pythonProc: ChildProcessWithoutNullStreams | undefined;
+let webSocket: WebSocket | undefined;
+let pythonProcess: ChildProcessWithoutNullStreams | undefined;
 
+// distinguish between development and production environment
 const pythonPath: string = app.isPackaged
     ? path.join(__dirname, '..', '..', 'app.asar.unpacked', 'python', 'server.py')
     : path.join(__dirname, '..', 'python', 'server.py');
@@ -24,19 +25,19 @@ const createWindow = (): void => {
         },
     });
 
-    // Load Svelte frontend
+    // load Svelte frontend
     win.loadFile(path.join(__dirname, '..', 'html', '../', 'svelte-frontend', 'dist', 'index.html'));
 };
 
 const connectToPythonServer = (): void => {
-    ws = new WebSocket('ws://localhost:8765');
+    webSocket = new WebSocket('ws://localhost:8765');
 
-    ws.on('open', () => {
+    webSocket.on('open', () => {
         console.log('Connected to Python server');
-        ws?.send('Hello from Electron main process!');
+        webSocket?.send('Hello from Electron main process!');
     });
 
-    ws.on('message', (data) => {
+    webSocket.on('message', (data) => {
         console.log(`Received from Python: ${data}`);
         const win = BrowserWindow.getAllWindows()[0];
         if (win && !win.webContents.isLoading()) {
@@ -45,26 +46,26 @@ const connectToPythonServer = (): void => {
         }
     });
 
-    ws.on('close', () => console.log('Connection closed'));
-    ws.on('error', (err) => console.error('WebSocket error:', err));
+    webSocket.on('close', () => console.log('Connection closed'));
+    webSocket.on('error', (err) => console.error('WebSocket error:', err));
 };
 
 const startPythonServer = (): void => {
-    pythonProc = spawn('python', ['-u', pythonPath]);
+    pythonProcess = spawn('python', ['-u', pythonPath]);
     console.log(process.resourcesPath);
 
-    pythonProc.stdout.on('data', (data) => console.log(`Py: ${data}`));
-    pythonProc.stderr.on('data', (data) => console.error(`PyErr: ${data}`));
+    pythonProcess.stdout.on('data', (data) => console.log(`Py: ${data}`));
+    pythonProcess.stderr.on('data', (data) => console.error(`PyErr: ${data}`));
 };
 
 const stopPythonServer = (): void => {
-    ws?.close();
-    pythonProc?.kill();
+    webSocket?.close();
+    pythonProcess?.kill();
 };
 
 ipcMain.on('send-to-python', (event: IpcMainEvent, message: string) => {
-    if (ws && ws.readyState === WebSocket.OPEN) {
-        ws.send(message);
+    if (webSocket && webSocket.readyState === WebSocket.OPEN) {
+        webSocket.send(message);
     } else {
         console.error('WebSocket not connected');
     }

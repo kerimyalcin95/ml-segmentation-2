@@ -39,7 +39,7 @@ Changes include codebase improvement, automated unit testing, modernizing the UI
 **Bridge:**  
 [Electron](https://www.electronjs.org/) wraps the frontend as a desktop app and connects to the backend  using [TypeScript](https://www.typescriptlang.org/)  and [Node](https://nodejs.org/en).
 
-**IPC [Inter-Process-Communation]/Client-Server:**  
+**IPC (Inter-Process-Communation) and Client-Server:**  
  Enables real-time communication between frontend client and backend (local) server using [WebSocket](https://developer.mozilla.org/en-US/docs/Web/API/WebSockets_API) technology.
 
 **Frontend:**  
@@ -71,7 +71,7 @@ For detailed instructions on setup and building, refer to the [Electron Forge Do
 
 ## Project Structure
 
-The root project folder `ml-segmentation-2` is devided into three main directories:
+The root project folder `ml-segmentation-2` is divided into three main directories:
 
 - **`\python` directory**  
   contains the backend implementation written in [Python](https://www.python.org/about/).

@@ -21,7 +21,11 @@ export default defineConfig(
             parser: tsParser,
             globals: globals.node,
             parserOptions: {
-                project: "./tsconfig.json",
+                project: [
+                    "./tsconfig.json",
+                    "./svelte-frontend/tsconfig.app.json",
+                    "./svelte-frontend/tsconfig.node.json"
+                ],
                 tsconfigRootDir: path.resolve(),
                 sourceType: "module"
             }

@@ -17,6 +17,9 @@
     - [Node.js and Python](#nodejs-and-python)
     - [Installing Node.js packages](#installing-nodejs-packages)
     - [Installing Python packages](#installing-python-packages)
+      - [How to Install Python Packages on Windows](#how-to-install-python-packages-on-windows)
+      - [How to Install Python Packages on Linux (Debian)](#how-to-install-python-packages-on-linux-debian)
+      - [How to Install Python Packages on macOS](#how-to-install-python-packages-on-macos)
     - [Running and testing the Svelte frontend](#running-and-testing-the-svelte-frontend)
     - [Building the Svelte frontend](#building-the-svelte-frontend)
     - [Running and testing the Electron app](#running-and-testing-the-electron-app)
@@ -54,9 +57,7 @@ Changes include codebase improvement, automated unit testing, modernizing the UI
 - Download and install [Python](https://www.python.org/downloads/). During installation please **disable** the `MAX_PATH` limit.  
 - Download the latest [release](https://github.com/kerimyalcin95/ml-segmentation-2/tags) into your `Desktop` folder. You need the setup executable and the compressed source files.  
 - Unzip the source files into your `Desktop` folder.  
-- Open a terminal and change the directory into the project main directory where you find `requirements.txt`. The `requirements.txt` lists all Python packages needed for developing the project.
-- Inside the project folder run `pip install -r requirements.txt`. `pip` installs all packages
-listed inside `requirements.txt`.
+- Follow the instructions in [Installing Python packages](#installing-python-packages)
 - After `pip` installed all packages, run the setup executable. The executable can also be run before installing all Python packages, but the app won't work.  
 
 ### How to Install the Release on Linux (Debian)
@@ -120,8 +121,32 @@ Inside the project folder run `npm install`. Then inside the `svelte-frontend` f
 
 ### Installing Python packages
 
-Inside the project folder run `pip install -r requirements.txt`. `pip` installs all packages
-listed inside `requirements.txt`.
+#### How to Install Python Packages on Windows
+
+Before installing update the package manager `pip`:  
+`python -m pip install --upgrade pip`
+
+Open a terminal and run:  
+`pip install websockets`  
+`pip install opencv-python`  
+`pip install fastai`  
+
+or run:  
+`pip install websockets opencv-python fastai`  
+
+Please note that the current project development state requires just the `websockets` package.
+
+To remove **all installed packages** from your system run (e.g. in your `Desktop` folder):  
+`pip freeze > packages.txt`  
+`pip uninstall -r packages.txt -y`
+
+#### How to Install Python Packages on Linux (Debian)
+
+TODO
+
+#### How to Install Python Packages on macOS
+
+TODO
 
 ### Running and testing the Svelte frontend
 

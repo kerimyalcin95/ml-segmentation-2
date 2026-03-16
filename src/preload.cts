@@ -1,5 +1,7 @@
 import { contextBridge, ipcRenderer, IpcRendererEvent } from 'electron';
 
+console.log("preload.js loaded.");
+
 contextBridge.exposeInMainWorld('versions', {
     node: (): string => process.versions.node,
     chrome: (): string => process.versions.chrome,
@@ -19,5 +21,6 @@ contextBridge.exposeInMainWorld('electronAPI', {
     },
     sendMessage: (message: string) => {
         ipcRenderer.send('send-to-python', message);
+        console.log("ipcRenderer sends.");
     },
 } as ElectronAPI);

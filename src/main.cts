@@ -2,31 +2,33 @@ import { app, BrowserWindow, ipcMain, IpcMainEvent } from 'electron';
 import path from 'node:path';
 import { spawn, ChildProcessWithoutNullStreams } from 'node:child_process';
 import WebSocket from 'ws';
+import squirrelStartup from 'electron-squirrel-startup';
 
 let webSocket: WebSocket | undefined;
 let pythonProcess: ChildProcessWithoutNullStreams | undefined;
 
 // distinguish between development and production environment
 const pythonPath: string = app.isPackaged
-    ? path.join(__dirname, '..', '..', 'app.asar.unpacked', 'python', 'server.py')
-    : path.join(__dirname, '..', 'python', 'server.py');
+    ? path.join(__dirname, '..', '..', '..', 'app.asar.unpacked', 'python', 'server.py')
+    : path.join(__dirname, '..', '..', 'python', 'server.py');
 
 const createWindow = (): void => {
-    if (require('electron-squirrel-startup')) {
+    if (squirrelStartup) {
         app.quit();
         return;
     }
-
-    const win = new BrowserWindow({
+    
+    const window = new BrowserWindow({
         width: 800,
         height: 800,
         webPreferences: {
-            preload: path.join(__dirname, 'preload.js'),
+            preload: path.join(__dirname, 'preload.cjs'),
+            contextIsolation: true,
+            nodeIntegration: false
         },
     });
 
-    // load Svelte frontend
-    win.loadFile(path.join(__dirname, '..', 'html', '../', 'svelte-frontend', 'dist', 'index.html'));
+    window.loadFile(path.join(__dirname, '..', '..', 'html', '../', 'svelte-frontend', 'dist', 'index.html'));
 };
 
 const connectToPythonServer = (): void => {
@@ -52,7 +54,7 @@ const connectToPythonServer = (): void => {
 
 const startPythonServer = (): void => {
     pythonProcess = spawn('python', ['-u', pythonPath]);
-    console.log(process.resourcesPath);
+    console.log("Python server started.");
 
     pythonProcess.stdout.on('data', (data) => console.log(`Py: ${data}`));
     pythonProcess.stderr.on('data', (data) => console.error(`PyErr: ${data}`));
@@ -80,8 +82,6 @@ app.whenReady().then(() => {
     app.on('activate', () => {
         if (BrowserWindow.getAllWindows().length === 0) createWindow();
     });
-
-    console.log(pythonPath.toString());
 });
 
 app.on('window-all-closed', () => {

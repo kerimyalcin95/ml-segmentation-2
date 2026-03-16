@@ -118,7 +118,7 @@ Download and install [Python](https://www.python.org/downloads/).
 
 ### Installing Node.js packages
 
-Inside the project folder run  
+Inside the project folder run:  
 `npm install`
 
 Then inside the `/svelte-frontend` folder run  
@@ -190,7 +190,6 @@ To create a setup installer, where all components the app are packaged **inside 
 `npm run make-setup`  
 
 or run:  
-
 `npm run make-installer`  
 
 The setup installer will be created inside `\out\make`.
@@ -222,7 +221,7 @@ The Svelte frontend project files are build and saved into `\svelte-frontend\dis
 
 Use if there is a need to add the Electron project manually to Electron Forge (e.g. accidentally removing all dependencies from `package.json`)
 
-Inside the root project folder `ml-segmentation-2` run
+Inside the root project folder `ml-segmentation-2` run:
 
 `npm install --save-dev @electron-forge/cli`  
 `npm exec --package=@electron-forge/cli -c "electron-forge import"`

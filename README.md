@@ -20,11 +20,12 @@
       - [How to Install Python Packages on Windows](#how-to-install-python-packages-on-windows)
       - [How to Install Python Packages on Linux (Debian)](#how-to-install-python-packages-on-linux-debian)
       - [How to Install Python Packages on macOS](#how-to-install-python-packages-on-macos)
-    - [Running and testing the Svelte frontend](#running-and-testing-the-svelte-frontend)
-    - [Building the Svelte frontend](#building-the-svelte-frontend)
-    - [Running and testing the Electron app](#running-and-testing-the-electron-app)
-    - [Building and distributing the Electron app](#building-and-distributing-the-electron-app)
-    - [Import Electron project to use Electron Forge](#import-electron-project-to-use-electron-forge)
+    - [How to Build the Electron app](#how-to-build-the-electron-app)
+    - [How to Test the Electron App](#how-to-test-the-electron-app)
+    - [How to Distribute the Electron App](#how-to-distribute-the-electron-app)
+    - [How to Test the Svelte Frontend](#how-to-test-the-svelte-frontend)
+    - [How to Build the Svelte Frontend](#how-to-build-the-svelte-frontend)
+    - [Import the Electron project to use Electron Forge](#import-the-electron-project-to-use-electron-forge)
   - [Manual](#manual)
   - [Licence](#licence)
 
@@ -117,7 +118,12 @@ Download and install [Python](https://www.python.org/downloads/).
 
 ### Installing Node.js packages
 
-Inside the project folder run `npm install`. Then inside the `svelte-frontend` folder run `npm install` again.
+Inside the project folder run  
+`npm install`
+
+Then inside the `/svelte-frontend` folder run  
+`npm install`  
+again.
 
 ### Installing Python packages
 
@@ -148,25 +154,71 @@ TODO
 
 TODO
 
-### Running and testing the Svelte frontend
+### How to Build the Electron app
 
-Inside the `svelte-frontend` folder run `npm run preview`. Vite starts a server to preview
-the svelte app.
+Inside the project folder run:  
+`npm run build`  
 
-### Building the Svelte frontend
+The project backend TypeScript files are compiled into JavaScript files and saved into `\dist`.  
+Then the project frontend Svelte project is build and saved into `\svelte-frontend\dist`.
 
-Inside the `svelte-frontend` folder run `npm run build`. Vite generates the Svelte frontend
-files inside the `svelte-frontend/dist` folder.
+### How to Test the Electron App
 
-### Running and testing the Electron app
+Inside the project folder run:  
+`npm run start`
 
-Inside the root project folder `ml-segmentation-2` run `npm run start`. This starts the Electron app through Electron-Forge.
+or run:  
+`npm run test`
 
-### Building and distributing the Electron app
+The project frontend and backend is build and the Electron app is started for testing.
 
-Inside the root project folder `ml-segmentation-2` run `npm run make`. Please note that Electron-Forge is not configured for Linux and macOS, yet.
+### How to Distribute the Electron App
 
-### Import Electron project to use Electron Forge
+**Standalone package**:
+
+To create a standalone package, where all components of the app are packaged **inside a folder** run:  
+`npm run make-package`
+
+or run:  
+`npm run make-standalone`
+
+The standalone package will be created inside `\out`.
+
+**Setup installer**:
+
+To create a setup installer, where all components the app are packaged **inside an installer** run:  
+`npm run make-setup`  
+
+or run:  
+
+`npm run make-installer`  
+
+The setup installer will be created inside `\out\make`.
+
+### How to Test the Svelte Frontend
+
+Inside the project folder run:  
+`npm run fe-start`
+
+or run:  
+`npm run fe-test`  
+or  
+`npm run fe-preview`
+
+The Svelte frontend project files are build and saved into `\svelte-frontend\dist`.  
+A local server will be started where the frontend app can be run on a browser.
+
+To kill the server, type:  
+`q + enter`
+
+### How to Build the Svelte Frontend
+
+Inside the project folder run:  
+`npm run fe-build`  
+
+The Svelte frontend project files are build and saved into `\svelte-frontend\dist`.
+
+### Import the Electron project to use Electron Forge
 
 Use if there is a need to add the Electron project manually to Electron Forge (e.g. accidentally removing all dependencies from `package.json`)
 

@@ -11,7 +11,8 @@
     "checkJs": true,
     "moduleDetection": "force",
     "composite": true,
-    "declaration": true
+    "declaration": true,
+    "noEmitOnError": true
   },
   "include": ["src/**/*.ts", "src/**/*.js", "src/**/*.svelte"]
 }

@@ -16,11 +16,13 @@
         "moduleDetection": "force",
         "skipLibCheck": true,
         "esModuleInterop": true,
-        "moduleResolution": "nodenext"
+        "moduleResolution": "nodenext",
+        "noEmitOnError": true
     },
     "include": [
         "src/**/*",
         "eslint.config.mts",
-        "forge.config.ts"
+        "forge.config.ts",
+        "vitest.config.ts"
     ]
 }

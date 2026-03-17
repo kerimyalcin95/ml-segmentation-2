@@ -25,6 +25,7 @@
     - [How to Distribute the Electron App](#how-to-distribute-the-electron-app)
     - [How to Test the Svelte Frontend](#how-to-test-the-svelte-frontend)
     - [How to Build the Svelte Frontend](#how-to-build-the-svelte-frontend)
+    - [How to Run Unit Tests in TypeScript](#how-to-run-unit-tests-in-typescript)
     - [Import the Electron project to use Electron Forge](#import-the-electron-project-to-use-electron-forge)
   - [Manual](#manual)
   - [Licence](#licence)
@@ -167,9 +168,6 @@ Then the project frontend Svelte project is build and saved into `\svelte-fronte
 Inside the project folder run:  
 `npm run start`
 
-or run:  
-`npm run test`
-
 The project frontend and backend is build and the Electron app is started for testing.
 
 ### How to Distribute the Electron App
@@ -199,8 +197,6 @@ The setup installer will be created inside `\out\make`.
 Inside the project folder run:  
 `npm run fe-start`
 
-or run:  
-`npm run fe-test`  
 or  
 `npm run fe-preview`
 
@@ -216,6 +212,14 @@ Inside the project folder run:
 `npm run fe-build`  
 
 The Svelte frontend project files are build and saved into `\svelte-frontend\dist`.
+
+### How to Run Unit Tests in TypeScript
+
+The project uses Vitest for Unit testing.  
+TypeScript unit test files are saved as `*.test.ts` beside the reference file.
+
+To run a unit test type:  
+`npm run test`
 
 ### Import the Electron project to use Electron Forge
 

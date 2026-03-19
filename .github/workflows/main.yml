@@ -1,1 +1,10 @@
+name: build Windows
 
+on: []  # no triggers, does nothing
+
+jobs:
+  do_nothing:
+    runs-on: windows-latest
+    steps:
+      - name: Idle step
+        run: echo "Nothing to do"

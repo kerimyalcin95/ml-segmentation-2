@@ -13,6 +13,7 @@
     "composite": true,
     "declaration": true,
     "noEmitOnError": true,
+    "noImplicitReturns": true,
     "strict": true
   },
   "include": ["src/**/*.ts", "src/**/*.js", "src/**/*.svelte"]
